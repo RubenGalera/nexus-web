@@ -1,0 +1,75 @@
+/* ============================================
+   NEXUS — Reset y Estilos Base
+   ============================================ */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-cream);
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: inherit;
+}
+
+input, select, textarea {
+  font-family: inherit;
+}
+
+/* Contenedor principal */
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--space-6);
+}
+
+/* Textos customs */
+.text-gold   { color: var(--color-gold); }
+.text-muted  { color: var(--color-muted); }
+.text-cream  { color: var(--color-cream); }
+
+/* Separadores */
+.divider {
+  width: 60px;
+  height: 2px;
+  background: var(--color-gold);
+  margin: var(--space-6) 0;
+}
+
+.divider--center {
+  margin-left: auto;
+  margin-right: auto;
+}

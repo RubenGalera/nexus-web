@@ -1,0 +1,189 @@
+/* ============================================
+   NEXUS — Catálogo de Libros
+   ============================================ */
+
+/* --- CABECERA DE PÁGINA --- */
+.page-header {
+  padding-top: calc(var(--nav-height) + var(--space-16));
+  padding-bottom: var(--space-12);
+  border-bottom: 1px solid var(--color-border);
+  background: linear-gradient(180deg, var(--color-surface) 0%, transparent 100%);
+}
+
+.page-header_eyebrow {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  margin-bottom: var(--space-3);
+}
+
+.page-header_title {
+  font-family: var(--font-display);
+  font-size: var(--text-4xl);
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--color-cream);
+}
+
+.page-header_sub {
+  font-size: var(--text-base);
+  color: var(--color-muted);
+  margin-top: var(--space-4);
+  max-width: 520px;
+}
+
+
+/* --- LAYOUT PRINCIPAL --- */
+.catalogo-layout {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  padding: var(--space-12) 0 var(--space-24);
+}
+
+
+/* --- TOOLBAR --- */
+.catalogo-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+}
+
+.catalogo-toolbar_count {
+  font-size: var(--text-sm);
+  color: var(--color-muted);
+}
+
+.catalogo-toolbar_count strong {
+  color: var(--color-cream);
+}
+
+.catalogo-toolbar_orden {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-size: var(--text-sm);
+  color: var(--color-muted);
+}
+
+.catalogo-toolbar_select {
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  color: var(--color-cream);
+  font-size: var(--text-sm);
+  font-family: inherit;
+  padding: var(--space-2) var(--space-3);
+  outline: none;
+  cursor: pointer;
+  transition: border-color var(--transition-fast);
+}
+
+.catalogo-toolbar_select:focus {
+  border-color: var(--color-gold);
+}
+
+
+/* --- GRID DE TARJETAS --- */
+.catalogo-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-6);
+}
+
+
+/* ============================================
+   RESPONSIVE — Tablets y Escritorio
+   ============================================ */
+
+@media (max-width: 480px) {
+  .catalogo-grid .card-libro {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+}
+
+@media (min-width: 650px) {
+  .catalogo-grid .card-libro {
+    max-width: 48%;
+  }
+}
+
+@media (min-width: 900px) {
+  .catalogo-grid .card-libro {
+    flex-wrap: nowrap;
+  }
+}
+
+/* --- PAGINACIÓN --- */
+.paginacion {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  margin-top: var(--space-12);
+}
+
+.paginacion_btn {
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  font-size: var(--text-sm);
+  color: var(--color-muted);
+  background: transparent;
+  cursor: pointer;
+  transition: var(--transition-fast);
+  font-family: inherit;
+}
+
+.paginacion_btn:hover {
+  border-color: var(--color-gold);
+  color: var(--color-gold);
+}
+
+.paginacion_btn.active {
+  background: var(--color-gold);
+  border-color: var(--color-gold);
+  color: var(--color-bg);
+  font-weight: 700;
+}
+
+
+/* --- ESTADO VACÍO / ERROR --- */
+.estado-vacio {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-20) var(--space-6);
+  text-align: center;
+  gap: var(--space-4);
+}
+
+.estado-vacio_icono {
+  font-size: 3rem;
+  opacity: 0.5;
+}
+
+.estado-vacio_titulo {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  color: var(--color-cream);
+}
+
+.estado-vacio_desc {
+  font-size: var(--text-sm);
+  color: var(--color-muted);
+}
+
+.cargando{
+  width: 40px;
+}

@@ -1,0 +1,736 @@
+/* --- CABECERA --- */
+.page-header {
+  padding-top: calc(var(--nav-height) + var(--space-16));
+  padding-bottom: var(--space-12);
+  border-bottom: 1px solid var(--color-border);
+  background: linear-gradient(180deg, var(--color-surface) 0%, transparent 100%);
+}
+
+.page-header_eyebrow {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  margin-bottom: var(--space-3);
+}
+
+.page-header_title {
+  font-family: var(--font-display);
+  font-size: var(--text-4xl);
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--color-cream);
+}
+
+.page-header_sub {
+  font-size: var(--text-base);
+  color: var(--color-muted);
+  margin-top: var(--space-4);
+  max-width: 520px;
+}
+
+
+/* ============================================
+   PLANO GRID PRINCIPAL
+   ============================================ */
+
+.plano-wrapper {
+  padding: var(--space-8) 0 var(--space-24);
+}
+
+/* DEFINICIÓN DE ÁREAS */
+.zona-entrada      { grid-area: entrada; }
+.zona-silencio      { grid-area: zona-silencio; }
+.zona-sala-grande   { grid-area: sala-grande; }
+.zona-mesas         { grid-area: mesas-ind; }
+.zona-salas-reunion { grid-area: salas-reunion; }
+.zona-gimnasio      { grid-area: zona-comun; }
+
+/* GRID DEL PLANO — Mobile First */
+.plano {
+  display: grid;
+  gap: var(--space-3);
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    "entrada"
+    "zona-silencio"
+    "sala-grande"
+    "mesas-ind"
+    "salas-reunion"
+    "zona-comun";
+}
+
+/* --- ZONAS DEL PLANO --- */
+.zona {
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  position: relative;
+  min-height: 80px;
+  background: var(--color-surface); 
+  border: 1px solid var(--color-border);
+}
+
+/* Estilos visuales por zona */
+.zona-entrada {
+  background: var(--color-surface-2);
+  border: 1px dashed var(--color-border);
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: center;
+  gap: var(--space-1);
+  min-height: 60px;
+}
+
+.zona-entrada-label {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  text-align: center;
+  width: 100%;
+}
+
+.zona-label {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  display: inline-block;
+}
+
+.fecha_hoy {
+  font-size: 0.6rem;
+  color: var(--color-cream);
+  width: auto;
+  margin-bottom: 1px;
+}
+
+/* --- GRID INTERNO DE MESAS INDIVIDUALES --- */
+.mesas-grid {
+  display: grid;
+  gap: var(--space-3);
+  grid-template-columns: 1fr;
+}
+
+/* --- GRID INTERNO DE SALAS DE REUNIÓN --- */
+.salas-grid {
+  display: grid;
+  gap: var(--space-3);
+  grid-template-columns: 1fr;
+}
+
+/* --- ESPACIO (tarjeta individual clicable) --- */
+.espacio {
+  border-radius: var(--radius-sm);
+  padding: var(--space-4);
+  cursor: pointer;
+  transition: var(--transition-fast);
+  border: 2px solid transparent;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  position: relative;
+  z-index: 0;
+  overflow: hidden;
+  justify-content: space-between;
+}
+
+.espacio:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-card);
+}
+
+/* --- CARGA IMÁGENES DE FONDO --- */
+.espacio::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0.1;
+  border-radius: inherit;
+  z-index: -1; 
+}
+
+.sala-hopper::before{ background: url('../img/sala-hopper.jpg') center; }
+.sala-picasso::before  { background-image: url('../img/sala-picasso.jpg'); }
+.sala-curie::before    { background-image: url('../img/sala-curie.jpg'); }
+.sala-da-vinci::before { background-image: url('../img/sala-da-vinci.jpg'); }
+.sala-platon::before { background-image: url('../img/sala-platon.jpg'); }
+
+
+/* --- ESTILOS ESPACIO LIBRE - OCUPADO --- */
+.espacio.libre {
+  background: #4caf821a;
+  border-color: #3cb37e96;
+}
+
+.espacio.libre:hover {
+  border-color: #4caf82;
+}
+
+.espacio.ocupado {
+  background: rgba(224, 85, 85, 0.1);
+  border-color: rgba(224, 85, 85, 0.5);
+  cursor: not-allowed;
+}
+
+/* --- ESTILOS ELEMENTOS ESPACIO --- */
+.espacio_inner {
+    display: flex;
+    flex-direction: column;
+ }
+.espacio_nombre {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: 600;
+  color: var(--color-cream);
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.espacio_desc {
+    font-size: var(--text-xs);
+    color: var(--color-cream);
+    line-height: 1.5;
+}
+
+.espacio_estado {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-top: var(--space-3);
+}
+
+.espacio.libre    .espacio_estado, .espacio.libre    .espacio_horario { color: #4caf82; }
+.espacio.ocupado  .espacio_estado, .espacio.ocupado  .espacio_horario { color: #e05555; }
+
+.espacio_horario {
+  font-size: var(--text-xs);
+  color: var(--color-cream);
+}
+
+.espacio_footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: var(--space-2);
+    border-top: 1px solid var(--color-gold);
+}
+
+.espacio_capacidad {
+    font-size: var(--text-xs);
+    color: var(--color-muted);
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+}
+
+.espacio_capacidad-num {
+    color: var(--color-gold);
+}
+
+.espacio_precio{
+  font-weight: 700;
+  font-size: var(--text-xs);
+  color: var(--color-gold);
+}
+
+
+/* ACTIVIDADES GIMNASIO */
+.zona-gimnasio {
+  display: flex;
+  flex-direction: column;
+}
+
+.zona-gimnasio-titulo{
+  display: flex;
+  flex-direction: row;
+  margin-bottom: var(--space-4);
+  align-items: flex-end;
+}
+
+.zona-gimnasio-imagen{
+  height: 60px;
+  border-radius: var(--radius-sm);
+  background: url('../img/actividades.gif') center;
+  background-size: cover;
+  background-position: center;
+}
+
+/* ============================================
+   CALENDARIO SEMANAL DE ACTIVIDADES
+   ============================================ */
+
+.gimnasio-calendario {
+  display: grid;
+  grid-template-columns: 48px repeat(5, 1fr);
+  gap: 1px;
+  margin-top: var(--space-3);
+  background: var(--color-border);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  font-size: var(--text-xs);
+}
+
+/* Cabecera días */
+.gcal-dia-header {
+  background: var(--color-surface-2);
+  padding: var(--space-2) var(--space-1);
+  text-align: center;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  font-size: 0.65rem;
+}
+
+.gcal-dia-header.hoy {
+  background: rgba(201, 168, 76, 0.12);
+  color: var(--color-gold-light);
+}
+
+/* Celda de horas */
+.gcal-hora {
+  background: var(--color-surface-2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-muted);
+  font-size: 0.6rem;
+  font-weight: 600;
+  padding: var(--space-2) var(--space-1);
+}
+
+/* Celda vacía */
+.gcal-vacio {
+  background: var(--color-surface);
+  min-height: 36px;
+}
+
+/* ACTIVIDAD */
+.gcal-actividad {
+  background: var(--color-surface-2);
+  padding: var(--space-1);
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  transition: var(--transition-fast);
+  border-left: 3px solid transparent;
+  position: relative;
+}
+
+.gcal-actividad:hover {
+  background: var(--color-bg);
+}
+
+.gcal-actividad_nombre {
+  font-weight: 600;
+  color: var(--color-marron);
+  font-size: 0.7rem;
+  line-height: 1.2;
+}
+
+.gcal-actividad_info {
+  font-size: 0.6rem;
+  color: var(--color-muted);
+}
+
+/* Colores por tipo — solo el borde izquierdo */
+.act-spinning  { border-left-color: #8770cc; }
+.act-yoga      { border-left-color: #438b6e; }
+.act-crossfit  { border-left-color: #ca8383; }
+.act-pilates   { border-left-color: #5c9ebc; }
+.act-zumba     { border-left-color: var(--color-gold); }
+.act-natacion  { border-left-color: #4ec2d2; }
+
+/* Loading */
+.plano-cargando {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: var(--space-24); 
+}
+
+.plano-cargando img{
+  width: 30px;
+}
+
+/* ============================================
+   POPUP / MODAL
+   ============================================ */
+
+.popup-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-6);
+  backdrop-filter: blur(4px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition-fast);
+}
+
+.popup-overlay.visible {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.popup {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-8);
+  width: 100%;
+  max-width: 440px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  transform: translateY(16px);
+  transition: transform var(--transition-fast);
+}
+
+.popup-overlay.visible .popup {
+  transform: translateY(0);
+}
+
+.popup_header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+.popup_titulo {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  font-weight: 700;
+  color: var(--color-cream);
+  line-height: 1.2;
+}
+
+.popup_cerrar {
+  background: none;
+  border: none;
+  color: var(--color-muted);
+  font-size: var(--text-xl);
+  cursor: pointer;
+  padding: var(--space-1);
+  line-height: 1;
+  transition: color var(--transition-fast);
+  flex-shrink: 0;
+}
+
+.popup_cerrar:hover {
+  color: var(--color-cream);
+}
+
+.popup_estado {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-sm);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.popup_estado.libre   { background: rgba(76,175,130,0.15); color: #4caf82; }
+.popup_estado.ocupado { background: rgba(224,85,85,0.15);  color: #e05555; }
+
+.popup_info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+  padding: var(--space-5) 0;
+}
+
+.popup_fila {
+  display: flex;
+  gap: var(--space-4);
+}
+
+.popup_clave {
+  flex: 0 0 110px;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.popup_valor {
+  font-size: var(--text-sm);
+  color: var(--color-cream);
+}
+
+.popup_acciones {
+  display: flex;
+  gap: var(--space-3);
+}
+
+.popup_acciones .btn {
+  flex: 1;
+}
+
+
+/* ============================================
+   CALENDARIO EN POPUP
+   ============================================ */
+
+.calendario {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+/* Cabecera mes */
+.calendario_header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.calendario_mes {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: 600;
+  color: var(--color-cream);
+  text-transform: capitalize;
+}
+
+.calendario_nav {
+  background: none;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  color: var(--color-muted);
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  font-size: var(--text-base);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition-fast);
+}
+
+.calendario_nav:hover {
+  border-color: var(--color-gold);
+  color: var(--color-gold);
+}
+
+/* GRID DÍAS — 7 columnas */
+.calendario_grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+
+.calendario_dia-nombre {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  text-align: center;
+  padding: var(--space-2) 0;
+}
+
+.calendario_dia {
+  /* aspect-ratio: 1; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  font-size: var(--text-sm);
+  cursor: pointer;
+  color: var(--color-muted);
+  transition: var(--transition-fast);
+  border: 1px solid transparent;
+}
+
+.calendario_dia:empty {
+  cursor: default;
+}
+
+.calendario_dia.pasado {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.calendario_dia.disponible {
+  color: var(--color-cream);
+}
+
+.calendario_dia.disponible:hover {
+  background: var(--color-surface-2);
+  border-color: var(--color-border);
+}
+
+.calendario_dia.seleccionado {
+  background: var(--color-gold);
+  color: var(--color-bg);
+  font-weight: 700;
+  border-color: var(--color-gold);
+}
+
+.calendario_dia.hoy {
+  border-color: var(--color-gold);
+  color: var(--color-gold);
+  font-weight: 600;
+}
+
+.calendario_dia.hoy.seleccionado {
+  background: var(--color-gold);
+  color: var(--color-bg);
+}
+
+/* SLOTS HORAS */
+.slots {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  border-top: 1px solid var(--color-border);
+  padding-top: var(--space-4);
+}
+
+.slots_titulo {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+}
+
+.slots_grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(68px, 1fr));
+  gap: var(--space-2);
+}
+
+.slot {
+  padding: var(--space-1) var(--space-2);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  text-align: center;
+  cursor: pointer;
+  color: var(--color-muted);
+  transition: var(--transition-fast);
+}
+
+.slot.libre {
+  color: var(--color-cream);
+  border-color: var(--color-border);
+}
+
+.slot.libre:hover {
+  border-color: var(--color-gold);
+  color: var(--color-gold);
+}
+
+.slot.ocupado {
+  opacity: 0.35;
+  cursor: not-allowed;
+  text-decoration: line-through;
+}
+
+.slot.seleccionado {
+  background: var(--color-gold);
+  border-color: var(--color-gold);
+  color: var(--color-bg);
+  font-weight: 700;
+}
+
+/* --- BOTONES --- */
+.btn {
+  padding: var(--space-3) var(--space-4);
+}
+
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
+/* Tablet */
+@media (min-width: 600px) {
+  .plano {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "entrada        entrada"
+      "zona-silencio  sala-grande"
+      "mesas-ind      mesas-ind"
+      "salas-reunion  salas-reunion"
+      "zona-comun     zona-comun";
+  }
+
+  .zona-entrada {
+    flex-wrap: nowrap;
+  }
+
+  .zona-entrada-label {
+    width: auto;
+  }
+
+  .mesas-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+  }
+
+  .salas-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .gcal-actividad {
+    padding: var(--space-2) var(--space-3);
+  }
+}
+
+
+/* Desktop */
+@media (min-width: 960px) {
+  .plano {
+    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-rows: auto auto auto;
+    grid-template-areas:
+      "entrada entrada entrada"
+      "zona-silencio mesas-ind sala-grande"
+      "salas-reunion salas-reunion salas-reunion"
+      "zona-comun zona-comun zona-comun";
+  }
+
+  .mesas-grid {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  }
+
+  .salas-grid {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  }
+
+  .espacio {
+    min-height: 230px;
+  }
+
+  .gcal-actividad {
+    flex-direction: row;
+    gap: 10px;
+  }
+
+}

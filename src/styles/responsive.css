@@ -1,0 +1,176 @@
+/* ============================================================
+   NEXUS — Responsive específico por dispositivo (Actividad 3 DWC)
+   ============================================================
+   Dispositivos de prueba elegidos para esta entrega:
+
+   MÓVILES
+   - iPhone SE (2.ª/3.ª gen)  → 375 × 667  (el más pequeño habitual)
+   - iPhone 14 Pro            → 390 × 844  (móvil grande actual)
+
+   TABLETS
+   - iPad Mini                → 768 × 1024 (tablet pequeña)
+   - iPad Pro 11"              → 834 × 1194 (tablet grande)
+
+   Estrategia: mobile-first. Las reglas base ya cubren el caso más
+   estrecho (iPhone SE). Los breakpoints añaden ajustes progresivos
+   para los anchos exactos de cada dispositivo de prueba.
+   ============================================================ */
+
+
+/* ─────────────────────────────────────────────
+   IPHONE SE — 375px (caso base, mobile-first)
+   No necesita media query: estas son las reglas
+   que ya se aplican por defecto en todo el sitio
+   (catalogo-grid a 1 columna, nav_menu colapsado,
+   detalle_layout en columna, etc.)
+───────────────────────────────────────────────── */
+@media (max-width: 375px) {
+  .hero_title       { font-size: var(--text-3xl); }
+  .page-header_title{ font-size: var(--text-3xl); }
+  .detalle_titulo   { font-size: var(--text-2xl); }
+  .container        { padding: 0 var(--space-4); }
+
+  /* En pantallas tan estrechas, los botones de acción ocupan
+     todo el ancho para facilitar el toque */
+  .detalle_acciones .btn,
+  .hero_actions .btn {
+    flex: 1 1 100%;
+  }
+
+  /* Stepper del formulario de compra: ocultamos el texto del
+     paso y dejamos solo el círculo numerado para no desbordar */
+  .stepper_label { display: none; }
+}
+
+
+/* ─────────────────────────────────────────────
+   IPHONE 14 PRO — 390px
+   Un poco más de aire que el SE, pero sigue
+   siendo un móvil de una sola columna.
+───────────────────────────────────────────────── */
+@media (min-width: 376px) and (max-width: 430px) {
+  .hero_title { font-size: var(--text-4xl); }
+
+  /* Recuperamos la etiqueta de texto del stepper, ya cabe */
+  .stepper_label { display: inline; font-size: 0.65rem; }
+}
+
+
+/* ─────────────────────────────────────────────
+   IPAD MINI — 768px (vertical)
+   Aquí entran los layouts de 2 columnas: catálogo
+   con sidebar visible, detalle de libro en fila,
+   navbar de escritorio.
+───────────────────────────────────────────────── */
+@media (min-width: 768px) and (max-width: 833px) {
+  .nav_menu{
+    gap: var(--space-4);
+  }
+  .catalogo-layout {
+    flex-direction: row;
+  }
+  .catalogo-sidebar {
+    width: 200px;
+    flex-shrink: 0;
+  }
+  .catalogo-content {
+    flex: 1;
+  }
+
+  .salas-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .formulario-wrapper {
+    flex-direction: row;
+  }
+  .formulario-sidebar {
+    width: 280px;
+    flex-shrink: 0;
+  }
+
+  .footer_col {
+    flex: 1 1 40%;
+  }
+}
+
+
+/* ─────────────────────────────────────────────
+   IPAD PRO 11" — 834px (vertical)
+   Más ancho disponible: el catálogo pasa a 3
+   columnas y las salas de coworking también
+   ganan una columna extra.
+───────────────────────────────────────────────── */
+@media (min-width: 834px) and (max-width: 1024px) {
+  .catalogo-grid .card-libro {
+    flex: 1 1 250px;
+    max-width: 31%;
+  }
+
+  .salas-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .catalogo-sidebar {
+    width: 240px;
+  }
+
+  .hero_title {
+    font-size: var(--text-5xl);
+  }
+
+  .footer_col {
+    flex: 1 1 22%;
+  }
+}
+
+
+/* ─────────────────────────────────────────────
+   Ajustes táctiles transversales a los 4 dispositivos
+   Aumentamos el área de toque de elementos
+   interactivos pequeños en cualquier pantalla
+   táctil (móvil o tablet), siguiendo el criterio
+   de accesibilidad táctil de mínimo 44×44px.
+───────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .nav_toggle {
+    width: 44px;
+    height: 44px;
+    justify-content: center;
+  }
+
+  .paginacion_btn {
+    width: 44px;
+    height: 44px;
+  }
+
+  .filtro-btn {
+    min-height: 40px;
+  }
+
+  .popup_cerrar {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+
+/* ─────────────────────────────────────────────
+   Orientación horizontal en móviles
+   (iPhone SE / 14 Pro tumbados)
+───────────────────────────────────────────────── */
+@media (max-width: 932px) and (orientation: landscape) {
+  .login-page {
+    padding: var(--space-4);
+  }
+  .login-card {
+    padding: var(--space-6);
+  }
+  .hero {
+    min-height: auto;
+    padding: calc(var(--nav-height) + var(--space-8)) 0 var(--space-8);
+  }
+}
