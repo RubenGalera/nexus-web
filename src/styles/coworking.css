@@ -271,7 +271,7 @@
 
 .gimnasio-calendario {
   display: grid;
-  grid-template-columns: 48px repeat(5, 1fr);
+  grid-template-columns: 48px repeat(5, minmax(100px, 1fr)); /* cambiado 1fr por minmax(100px, 1fr) para que el grid quede un poco más grande ya que permitimos el despplazamiento horizontal */
   gap: 1px;
   margin-top: var(--space-3);
   background: var(--color-border);
