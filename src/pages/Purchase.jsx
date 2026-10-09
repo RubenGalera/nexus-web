@@ -237,7 +237,7 @@ export default function Purchase() {
                 {librosComprados.length === 0 ? (
                   <p style={{ color: 'var(--color-muted)', fontSize: '0.875rem' }}>
                     Tu carrito está vacío.{' '}
-                    <Link to="/catalogo" style={{ color: 'var(--color-gold)' }}>
+                    <Link to="/catalogo" style={{ color: 'var(--color-gold)', display: 'inline-block', padding: '12px 0' }}> {/* le añado padding para que sea más fácil hacer click en móvil */}
                       Ver catálogo →
                     </Link>
                   </p>

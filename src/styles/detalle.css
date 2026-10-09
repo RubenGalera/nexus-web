@@ -23,6 +23,9 @@
 .breadcrumb_item a {
   color: var(--color-muted);
   transition: color var(--transition-fast);
+  display: inline-flex;  /* para que el link sea un contenedor flexible y podamos alinear el contenido centrado y que tenga un tamaño mínimo */
+  align-items: center;
+  min-height: 44px;
 }
 
 .breadcrumb_item a:hover {

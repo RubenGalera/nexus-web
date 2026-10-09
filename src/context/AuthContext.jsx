@@ -67,13 +67,13 @@ export function AuthProvider({ children }) {
 
     } catch {
       // Sin conexión → aceptar admin/admin69 para poder seguir
-      if (usuario === 'admin' && contrasena === 'admin') {
+      if (usuario === 'admin' && contrasena === 'admin69') { // Nos faltaba el 69 para cuando no haya conexion //
         const userData = { usuario: 'admin', nombre: 'Administrador' }
         _guardarUsuario(userData)
         setLoginLoading(false)
         return { success: true }
       }
-      setLoginError('Error de conexión. Usa admin / admi69 para continuar.')
+      setLoginError('Error de conexión. Usa admin / admin69 para continuar.')
       setLoginLoading(false)
       return { success: false }
     }
